@@ -1,0 +1,8 @@
+# From http://www.linuxfromscratch.org/blfs/view/svn/pst/openjade.html
+# MIT License
+
+install -v -m644 dsssl/catalog %{buildroot}/usr/share/sgml/openjade-1.3.2/
+
+install -v -m644 dsssl/*.{dtd,dsl,sgm} %{buildroot}/usr/share/sgml/openjade-1.3.2
+
+%post -p "/usr/bin/install-catalog --add /etc/sgml/sgml-docbook.cat /usr/share/sgml/openjade-1.3.2/catalog"
