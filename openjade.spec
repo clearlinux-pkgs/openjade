@@ -4,7 +4,7 @@
 #
 Name     : openjade
 Version  : 1.3.2
-Release  : 5
+Release  : 6
 URL      : http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
 Source0  : http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
 Summary  : No detailed summary available
@@ -47,6 +47,7 @@ Group: Development
 Requires: openjade-lib
 Requires: openjade-bin
 Requires: openjade-data
+Provides: openjade-devel
 
 %description dev
 dev components for the openjade package.
@@ -80,7 +81,7 @@ lib components for the openjade package.
 --enable-default-catalog=/etc/sgml/catalog \
 --enable-default-search-path=/usr/share/sgml \
 --datadir=/usr/share/sgml/openjade-1.3.2
-make V=1 %{?_smp_mflags}
+make V=1  %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
@@ -88,7 +89,6 @@ rm -rf %{buildroot}
 ## make_install_append content
 install -v -m644 dsssl/catalog %{buildroot}/usr/share/sgml/openjade-1.3.2/
 install -v -m644 dsssl/*.{dtd,dsl,sgm} %{buildroot}/usr/share/sgml/openjade-1.3.2
-%post -p "/usr/bin/install-catalog --add /etc/sgml/sgml-docbook.cat /usr/share/sgml/openjade-1.3.2/catalog"
 ## make_install_append end
 
 %files
