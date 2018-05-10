@@ -4,7 +4,7 @@
 #
 Name     : openjade
 Version  : 1.3.2
-Release  : 10
+Release  : 11
 URL      : http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
 Source0  : http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
 Summary  : No detailed summary available
