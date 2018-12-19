@@ -1,0 +1,6 @@
+Configure miss: whether make sets ${MAKE}
+Configure miss: cthread_fork in -lthreads
+Configure miss: whether size_t is unsigned int
+Configure miss: main in -lsocket
+Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: if gcc supports -c -o file.o

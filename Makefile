@@ -1,5 +1,5 @@
 PKG_NAME := openjade
-URL := http://downloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz
-ARCHIVES :=
+URL = https://sourceforge.net/projects/openjade/files/openjade/1.3.2/openjade-1.3.2.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common
