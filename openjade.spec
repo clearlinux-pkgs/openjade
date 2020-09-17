@@ -4,7 +4,7 @@
 #
 Name     : openjade
 Version  : 1.3.2
-Release  : 13
+Release  : 14
 URL      : https://sourceforge.net/projects/openjade/files/openjade/1.3.2/openjade-1.3.2.tar.gz
 Source0  : https://sourceforge.net/projects/openjade/files/openjade/1.3.2/openjade-1.3.2.tar.gz
 Summary  : No detailed summary available
@@ -30,7 +30,6 @@ Summary: bin components for the openjade package.
 Group: Binaries
 Requires: openjade-data = %{version}-%{release}
 Requires: openjade-license = %{version}-%{release}
-Requires: openjade-man = %{version}-%{release}
 
 %description bin
 bin components for the openjade package.
@@ -51,6 +50,7 @@ Requires: openjade-lib = %{version}-%{release}
 Requires: openjade-bin = %{version}-%{release}
 Requires: openjade-data = %{version}-%{release}
 Provides: openjade-devel = %{version}-%{release}
+Requires: openjade = %{version}-%{release}
 
 %description dev
 dev components for the openjade package.
@@ -84,6 +84,7 @@ man components for the openjade package.
 
 %prep
 %setup -q -n openjade-1.3.2
+cd %{_builddir}/openjade-1.3.2
 %patch1 -p1
 %patch2 -p1
 
@@ -91,8 +92,13 @@ man components for the openjade package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1545263025
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1600306211
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static --mandir=/usr/share/man \
 --enable-http \
 --enable-default-catalog=/etc/sgml/catalog \
@@ -101,15 +107,20 @@ export SOURCE_DATE_EPOCH=1545263025
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1545263025
+export SOURCE_DATE_EPOCH=1600306211
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/openjade
-cp COPYING %{buildroot}/usr/share/package-licenses/openjade/COPYING
-cp jadedoc/copying.txt %{buildroot}/usr/share/package-licenses/openjade/jadedoc_copying.txt
+cp %{_builddir}/openjade-1.3.2/COPYING %{buildroot}/usr/share/package-licenses/openjade/0165e1ea358c77aad62debbc8ff2500afb2e58e3
+cp %{_builddir}/openjade-1.3.2/jadedoc/copying.txt %{buildroot}/usr/share/package-licenses/openjade/6dc2ff7df6f06252d8449a3da8ffc522a0b582f9
 %make_install install-man
 ## install_append content
+# From http://www.linuxfromscratch.org/blfs/view/svn/pst/openjade.html
+# MIT License
+
 install -v -m644 dsssl/catalog %{buildroot}/usr/share/sgml/openjade-1.3.2/
+
 install -v -m644 dsssl/*.{dtd,dsl,sgm} %{buildroot}/usr/share/sgml/openjade-1.3.2
+
 ## install_append end
 
 %files
@@ -147,8 +158,8 @@ install -v -m644 dsssl/*.{dtd,dsl,sgm} %{buildroot}/usr/share/sgml/openjade-1.3.
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/openjade/COPYING
-/usr/share/package-licenses/openjade/jadedoc_copying.txt
+/usr/share/package-licenses/openjade/0165e1ea358c77aad62debbc8ff2500afb2e58e3
+/usr/share/package-licenses/openjade/6dc2ff7df6f06252d8449a3da8ffc522a0b582f9
 
 %files man
 %defattr(0644,root,root,0755)
